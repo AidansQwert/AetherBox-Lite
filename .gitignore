@@ -13,3 +13,4 @@
 !ci-debug.keystore
 .cxx/
 *.log
+dist/
