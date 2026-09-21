@@ -1,4 +1,4 @@
-# AetherBox Lite
+# AetherBox Lite Discontinued
 
 Companion app for running Linux **without root**.
 
