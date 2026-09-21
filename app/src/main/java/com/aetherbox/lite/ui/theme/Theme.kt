@@ -6,11 +6,9 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.aetherbox.lite.R
 
 val Ink = Color(0xFF0B1F24)
 val Lagoon = Color(0xFF0B3D4A)
@@ -20,8 +18,9 @@ val Fog = Color(0xFFC5D9DE)
 val Foam = Color(0xFFF4FAFB)
 val Ember = Color(0xFFC45C26)
 
-private val DisplayFont = FontFamily(Font(R.font.literata, FontWeight.SemiBold))
-private val BodyFont = FontFamily(Font(R.font.space_grotesk, FontWeight.Medium))
+// System families only — bundled variable TTFs were crash-prone on some devices.
+private val DisplayFont = FontFamily.Serif
+private val BodyFont = FontFamily.SansSerif
 
 private val LiteColors = lightColorScheme(
     primary = Lagoon,
@@ -62,14 +61,14 @@ private val LiteTypography = Typography(
     ),
     bodyLarge = TextStyle(
         fontFamily = BodyFont,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         color = Ink.copy(alpha = 0.82f)
     ),
     bodyMedium = TextStyle(
         fontFamily = BodyFont,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         lineHeight = 20.sp,
         color = Ink.copy(alpha = 0.72f)
