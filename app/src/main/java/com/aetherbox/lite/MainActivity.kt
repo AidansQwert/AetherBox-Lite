@@ -5,8 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
-import com.aetherbox.lite.ui.HomeScreen
-import com.aetherbox.lite.ui.theme.AetherBoxLiteTheme
+import com.aetherbox.lite.ui.LiteApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,9 +18,7 @@ class MainActivity : ComponentActivity() {
             // Older OEMs sometimes choke on edge-to-edge; UI still works.
         }
         setContent {
-            AetherBoxLiteTheme {
-                HomeScreen()
-            }
+            LiteApp()
         }
     }
 }

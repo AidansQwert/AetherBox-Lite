@@ -1,11 +1,29 @@
 # AetherBox Lite
 
-Companion app for running a Linux desktop **without root**.
+Companion app for running Linux **without root**.
 
 This is **not** AetherBox / Droidspaces. The full app needs Magisk or KernelSU and
-runs real containers via the native `droidspaces` binary. Lite is a guided
-Termux + PRoot / Omarchy (Hyprland) path. Expect softer GPU, namespaces, and
-isolation than the rooted build.
+runs real containers via the native `droidspaces` binary. Lite mirrors the rooted
+app’s **Home / Distros / Panel** shape, but installs happen in Termux (PRoot) —
+not native namespaces.
+
+## What matches rooted AetherBox
+
+| Root | Lite |
+| --- | --- |
+| Home + status | Status cards (Termux / X11 / Shizuku) |
+| Rootfs catalog | Distros tab (CLI proot-distro + Omarchy + feed links) |
+| Control panel | Panel (companion health, theme, device info) |
+| Theme palettes | Dark mode + Aether / Nebula / Ocean / Graphite / Forest |
+| Native spaces | **Not available** — needs Magisk |
+
+## Paths
+
+| Path | What you get |
+| --- | --- |
+| **CLI (proot-distro)** | Ubuntu, Debian, Alpine, Arch, Fedora — shell only |
+| **Omarchy** | Hyprland desktop via Termux:X11 — heavy (~8 GB free) |
+| **Rooted feeds** | Links into AetherBox rootfs releases (full app) |
 
 ## What stays where
 
@@ -15,25 +33,11 @@ isolation than the rooted build.
 | Root AetherBox app + C runtime | [AetherBox](https://github.com/AidansQwert/AetherBox) |
 | Linux guest rootfs catalogs / feeds | [AetherBox](https://github.com/AidansQwert/AetherBox) `Android/rootfs-feeds/` |
 
-Omarchy and other guest images are published from the main AetherBox releases.
-Lite only links and walks you through setup.
-
-## Expectations
-
-- No Magisk / KernelSU required
-- Optional [Shizuku](https://shizuku.rikka.app/) can help with some elevated host
-  actions, but it does **not** turn Lite into native AetherBox containers
-- Guest is PRoot-style; do not expect root-level GPU, mount, or cgroup behaviour
-
 ## Build
 
 ```bash
 ./gradlew :app:assembleDebug
 ```
-
-Release signing uses the same keystore properties as AetherBox when present in
-`local.properties` (`KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`) and a
-`droidspaces.keystore` next to this repo or paths you set yourself.
 
 ## License
 
