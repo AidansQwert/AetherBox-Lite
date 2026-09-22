@@ -22,7 +22,7 @@ android {
         applicationId = "com.aetherbox.lite"
         minSdk = 26
         targetSdk = 34
-        versionCode = 14
+        versionCode = 15
         versionName = "0.1.4"
         setProperty("archivesBaseName", "AetherBox-Lite-$versionName")
     }
