@@ -74,6 +74,20 @@ cd omarchy-android
 ./install.sh --yes
 """.trimIndent()
 
+private val XFCE_INSTALL = """
+pkg update -y
+pkg install -y x11-repo
+pkg install -y termux-x11-nightly proot-distro pulseaudio
+proot-distro install ubuntu
+proot-distro login ubuntu -- apt update
+proot-distro login ubuntu -- apt install -y xfce4 xfce4-terminal dbus-x11
+
+# Launch (open the Termux:X11 app first, then run this):
+termux-x11 :1 &
+sleep 2
+proot-distro login ubuntu -- env DISPLAY=:1 startxfce4
+""".trimIndent()
+
 @Composable
 fun HomeTab(
     showLimits: Boolean,
@@ -150,7 +164,7 @@ fun HomeTab(
             StatusCard(
                 title = "Termux:X11",
                 ready = x11,
-                detail = if (x11) "Installed" else "Needed for Omarchy desktop",
+                detail = if (x11) "Installed" else "Needed for XFCE / Omarchy desktop",
                 action = if (x11) "Open" else "Get",
                 onAction = {
                     if (!launchPackage(context, TERMUX_X11_PKG)) openUrl(context, URL_TERMUX_X11)
@@ -209,6 +223,20 @@ fun HomeTab(
             CommandPreview(UBUNTU_INSTALL)
             SetupStep(
                 index = "B",
+                title = "XFCE desktop",
+                body = "Full XFCE session over Termux:X11 — no root, no Shizuku. ~1.5 GB free.",
+                primary = "Copy install",
+                secondary = "Get Termux:X11",
+                onPrimary = {
+                    copyText(context, XFCE_INSTALL, "XFCE commands copied")
+                },
+                onSecondary = {
+                    if (!launchPackage(context, TERMUX_X11_PKG)) openUrl(context, URL_TERMUX_X11)
+                }
+            )
+            CommandPreview(XFCE_INSTALL)
+            SetupStep(
+                index = "C",
                 title = "Omarchy desktop",
                 body = "Hyprland via Termux:X11. Heavy (~8 GB free). Prefer Distros tab for more guests.",
                 primary = "Copy install",
@@ -342,3 +370,4 @@ private fun Hero(
         }
     }
 }
+
