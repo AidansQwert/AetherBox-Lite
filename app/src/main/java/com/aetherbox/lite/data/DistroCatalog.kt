@@ -97,6 +97,27 @@ cd omarchy-android
 """.trimIndent()
         ),
         DistroEntry(
+            id = "xfce-x11",
+            name = "XFCE Desktop (Termux:X11)",
+            tagline = "Full XFCE session over Termux:X11 — no root, no Shizuku needed.",
+            kind = DistroEntry.Kind.DESKTOP,
+            sizeHint = "~1.5 GB",
+            openUrl = "https://github.com/termux/termux-x11",
+            installCommands = """
+pkg update -y
+pkg install -y x11-repo
+pkg install -y termux-x11-nightly proot-distro pulseaudio
+proot-distro install ubuntu
+proot-distro login ubuntu -- apt update
+proot-distro login ubuntu -- apt install -y xfce4 xfce4-terminal dbus-x11
+
+# Launch (open the Termux:X11 app first, then run this):
+termux-x11 :1 &
+sleep 2
+proot-distro login ubuntu -- env DISPLAY=:1 startxfce4
+""".trimIndent()
+        ),
+        DistroEntry(
             id = "omarchy-rootfs",
             name = "Omarchy rootfs (rooted)",
             tagline = "Same guest packaged for full AetherBox — needs Magisk.",
@@ -106,8 +127,8 @@ cd omarchy-android
         ),
         DistroEntry(
             id = "xfce-feed",
-            name = "XFCE desktop feed",
-            tagline = "AetherBox rootfs catalog entry — rooted install only.",
+            name = "XFCE desktop feed (rooted)",
+            tagline = "Native AetherBox rootfs catalog entry — rooted install only. Use \"XFCE Desktop (Termux:X11)\" above for no-root.",
             kind = DistroEntry.Kind.ROOTFS_FEED,
             openUrl = "https://github.com/AidansQwert/AetherBox/tree/main/Android/rootfs-feeds"
         ),
